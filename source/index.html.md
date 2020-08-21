@@ -1,5 +1,5 @@
 ---
-title: Swagger Petstore v1.0.0
+title: Nu Passport v0.2.2
 language_tabs:
   - shell: Shell
   - http: HTTP
@@ -9,9 +9,7 @@ language_tabs:
   - php: PHP
   - java: Java
   - go: Go
-toc_footers:
-  - <a href="https://mermade.github.io/shins/asyncapi.html">See AsyncAPI
-    example</a>
+toc_footers: []
 includes: []
 search: true
 highlight_theme: darkula
@@ -21,87 +19,314 @@ headingLevel: 2
 
 <!-- Generator: Widdershins v4.0.1 -->
 
-<h1 id="swagger-petstore">Swagger Petstore v1.0.0</h1>
+<h1 id="nu-passport">Nu Passport v0.2.2</h1>
 
 > Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
 
-:dog: :cat: :rabbit: This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.
+REST API for gluu-passport
 
 Base URLs:
 
-* <a href="http://petstore.swagger.io/v2">http://petstore.swagger.io/v2</a>
+* <a href="https://t1.techno24x7.com">https://t1.techno24x7.com</a>
 
-<a href="http://swagger.io/terms/">Terms of service</a>
-Email: <a href="mailto:apiteam@swagger.io">Support</a> 
-License: <a href="http://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</a>
+    * **basePath** -  Default: passport
 
-# Authentication
+<a href="todo">Terms of service</a>
+Email: <a href="mailto:support@gluu.org">Gluu Team</a> Web: <a href="https://support.gluu.org">Gluu Team</a> 
+License: <a href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0</a>
 
-- oAuth2 authentication. 
+<h1 id="nu-passport-providers">providers</h1>
 
-    - Flow: implicit
-    - Authorization URL = [http://petstore.swagger.io/oauth/dialog](http://petstore.swagger.io/oauth/dialog)
+Manage gluu-passport providers
 
-|Scope|Scope Description|
-|---|---|
-|write:pets|modify pets in your account|
-|read:pets|read your pets|
+## getAllProviders
 
-* API Key (api_key)
-    - Parameter Name: **api_key**, in: header. 
-
-<h1 id="swagger-petstore-pet">pet</h1>
-
-Everything about your Pets
-
-<a href="http://swagger.io">Find out more</a>
-
-## addPet
-
-<a id="opIdaddPet"></a>
+<a id="opIdgetAllProviders"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X POST http://petstore.swagger.io/v2/pet \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer {access-token}'
+curl -X GET https://t1.techno24x7.com/providers \
+  -H 'Accept: application/json'
 
 ```
 
 ```http
-POST http://petstore.swagger.io/v2/pet HTTP/1.1
-Host: petstore.swagger.io
+GET https://t1.techno24x7.com/providers HTTP/1.1
+Host: t1.techno24x7.com
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json'
+};
+
+fetch('https://t1.techno24x7.com/providers',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://t1.techno24x7.com/providers',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://t1.techno24x7.com/providers', headers = headers)
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://t1.techno24x7.com/providers', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("https://t1.techno24x7.com/providers");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://t1.techno24x7.com/providers", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /providers`
+
+*return all providers*
+
+This will return all providers added in passport.
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "id": 0,
+    "slug": "string",
+    "displayName": "My Cool Customer",
+    "type": "saml",
+    "mapping": "saml_ldap_profile",
+    "passportStrategyId": "passport-saml",
+    "enabled": true,
+    "callbackUrl": "string",
+    "requestForEmail": true,
+    "emailLinkingSafe": true,
+    "authzParams": "string",
+    "logoPath": "string",
+    "options": {
+      "skipRequestCompression": "true,",
+      "authnRequestBinding": "HTTP-POST,",
+      "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient,",
+      "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=,",
+      "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO,",
+      "issuer": "urn:test:default"
+    },
+    "idpInitiated": {
+      "enabled": true,
+      "response_type": "code",
+      "scope": "openid profile"
+    }
+  }
+]
+```
+
+<h3 id="getallproviders-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|An array of providers|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
+
+<h3 id="getallproviders-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[[Provider](#schemaprovider)]|false|none|none|
+|» id|integer(int64)|true|read-only|none|
+|» slug|string|false|read-only|Will be created based on displayName<br>Example:<br>| Name             | slug             | metadata-url                     | |------------------|------------------|----------------------------------| | My Cool Customer | my-cool-customer | /providers/my-cool-customer/meta ||
+|» displayName|string|true|none|Name displayed to users|
+|» type|string|true|none|- `saml`: for inbound saml flows with desired **IDP**<br>- `openidconnect`: for inbound oidc-flows with desired **OP**<br>- `openidconnect-oxd`: for inbound oidc flows using **oxd**<br>- `oauth`: for inbound oAuth flow with desired AS|
+|» mapping|string|true|none|More infos about attributes mapping (here)[https://gluu.org/docs/gluu-server/4.2/authn-guide/passport/#attribute-mapping-and-transformation] LINK TO MAPPING ID|
+|» passportStrategyId|string|true|none|StrategyId text unique identifier|
+|» enabled|boolean|true|none|Defines if provider is enabled (true) or not (false)|
+|» callbackUrl|string|true|read-only|Passport provider callback Url. It's auto-generated.|
+|» requestForEmail|boolean|true|none|Enable request for e-mail feature, for more information please check gluu-passport docs.|
+|» emailLinkingSafe|boolean|true|none|Enable email linking feature, for more information please check gluu-passport docs.|
+|» authzParams|string|false|none|Usually may be left blank. It is used to supply the value for the second parameter of Passport.js method passport.authenticate|
+|» logoPath|string|false|none|path for the provider's logo file.|
+|» options|object|true|none|Providers' strategy options. Please check each strategy documentation for options.|
+|» idpInitiated|object|false|none|idp-initiated flow settings for provider|
+|»» enabled|boolean|true|none|Enable/Disable idp-initiated flow for this provider|
+|»» response_type|string|false|none|Response type requested to OIDC OP|
+|»» scope|string|false|none|scopes requested to OIDC OP separated by spaces|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|type|saml|
+|type|openidconnect|
+|type|openidconnect-oxd|
+|type|oauth|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|x-next|string||A link to the next page of responses|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## createProvider
+
+<a id="opIdcreateProvider"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST https://t1.techno24x7.com/providers \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json'
+
+```
+
+```http
+POST https://t1.techno24x7.com/providers HTTP/1.1
+Host: t1.techno24x7.com
 Content-Type: application/json
+Accept: application/json
 
 ```
 
 ```javascript
 const inputBody = '{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
+  "displayName": "My Cool Customer",
+  "type": "saml",
+  "mapping": "saml_ldap_profile",
+  "passportStrategyId": "passport-saml",
+  "enabled": true,
+  "requestForEmail": true,
+  "emailLinkingSafe": true,
+  "authzParams": "string",
+  "logoPath": "string",
+  "options": {
+    "skipRequestCompression": "true,",
+    "authnRequestBinding": "HTTP-POST,",
+    "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient,",
+    "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=,",
+    "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO,",
+    "issuer": "urn:test:default"
   },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
+  "idpInitiated": {
+    "enabled": true,
+    "response_type": "code",
+    "scope": "openid profile"
+  }
 }';
 const headers = {
   'Content-Type':'application/json',
-  'Authorization':'Bearer {access-token}'
+  'Accept':'application/json'
 };
 
-fetch('http://petstore.swagger.io/v2/pet',
+fetch('https://t1.techno24x7.com/providers',
 {
   method: 'POST',
   body: inputBody,
@@ -121,10 +346,10 @@ require 'json'
 
 headers = {
   'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer {access-token}'
+  'Accept' => 'application/json'
 }
 
-result = RestClient.post 'http://petstore.swagger.io/v2/pet',
+result = RestClient.post 'https://t1.techno24x7.com/providers',
   params: {
   }, headers: headers
 
@@ -136,10 +361,10 @@ p JSON.parse(result)
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Authorization': 'Bearer {access-token}'
+  'Accept': 'application/json'
 }
 
-r = requests.post('http://petstore.swagger.io/v2/pet', headers = headers)
+r = requests.post('https://t1.techno24x7.com/providers', headers = headers)
 
 print(r.json())
 
@@ -152,7 +377,7 @@ require 'vendor/autoload.php';
 
 $headers = array(
     'Content-Type' => 'application/json',
-    'Authorization' => 'Bearer {access-token}',
+    'Accept' => 'application/json',
 );
 
 $client = new \GuzzleHttp\Client();
@@ -161,7 +386,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('POST','http://petstore.swagger.io/v2/pet', array(
+    $response = $client->request('POST','https://t1.techno24x7.com/providers', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -178,7 +403,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet");
+URL obj = new URL("https://t1.techno24x7.com/providers");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -206,11 +431,11 @@ func main() {
 
     headers := map[string][]string{
         "Content-Type": []string{"application/json"},
-        "Authorization": []string{"Bearer {access-token}"},
+        "Accept": []string{"application/json"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/pet", data)
+    req, err := http.NewRequest("POST", "https://t1.techno24x7.com/providers", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -220,114 +445,390 @@ func main() {
 
 ```
 
-`POST /pet`
+`POST /providers`
 
-*Add a new pet to the store*
+*creates new provider*
+
+This will create a new provider on gluu-passport and return the created provider
 
 > Body parameter
 
 ```json
 {
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
+  "displayName": "My Cool Customer",
+  "type": "saml",
+  "mapping": "saml_ldap_profile",
+  "passportStrategyId": "passport-saml",
+  "enabled": true,
+  "requestForEmail": true,
+  "emailLinkingSafe": true,
+  "authzParams": "string",
+  "logoPath": "string",
+  "options": {
+    "skipRequestCompression": "true,",
+    "authnRequestBinding": "HTTP-POST,",
+    "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient,",
+    "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=,",
+    "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO,",
+    "issuer": "urn:test:default"
   },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
+  "idpInitiated": {
+    "enabled": true,
+    "response_type": "code",
+    "scope": "openid profile"
+  }
 }
 ```
 
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Pet>
-  <id>0</id>
-  <category>
-    <id>0</id>
-    <name>string</name>
-  </category>
-  <name>doggie</name>
-  <photoUrls>string</photoUrls>
-  <tags>
-    <id>0</id>
-    <name>string</name>
-  </tags>
-  <status>available</status>
-</Pet>
-```
-
-<h3 id="addpet-parameters">Parameters</h3>
+<h3 id="createprovider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[Pet](#schemapet)|true|Pet object that needs to be added to the store|
+|body|body|[Provider](#schemaprovider)|false|none|
+|» id|body|integer(int64)|true|none|
+|» slug|body|string|false|Will be created based on displayName|
+|» displayName|body|string|true|Name displayed to users|
+|» type|body|string|true|- `saml`: for inbound saml flows with desired **IDP**|
+|» mapping|body|string|true|More infos about attributes mapping (here)[https://gluu.org/docs/gluu-server/4.2/authn-guide/passport/#attribute-mapping-and-transformation] LINK TO MAPPING ID|
+|» passportStrategyId|body|string|true|StrategyId text unique identifier|
+|» enabled|body|boolean|true|Defines if provider is enabled (true) or not (false)|
+|» callbackUrl|body|string|true|Passport provider callback Url. It's auto-generated.|
+|» requestForEmail|body|boolean|true|Enable request for e-mail feature, for more information please check gluu-passport docs.|
+|» emailLinkingSafe|body|boolean|true|Enable email linking feature, for more information please check gluu-passport docs.|
+|» authzParams|body|string|false|Usually may be left blank. It is used to supply the value for the second parameter of Passport.js method passport.authenticate|
+|» logoPath|body|string|false|path for the provider's logo file.|
+|» options|body|object|true|Providers' strategy options. Please check each strategy documentation for options.|
+|» idpInitiated|body|object|false|idp-initiated flow settings for provider|
+|»» enabled|body|boolean|true|Enable/Disable idp-initiated flow for this provider|
+|»» response_type|body|string|false|Response type requested to OIDC OP|
+|»» scope|body|string|false|scopes requested to OIDC OP separated by spaces|
 
-<h3 id="addpet-responses">Responses</h3>
+#### Detailed descriptions
+
+**» slug**: Will be created based on displayName
+Example:
+| Name             | slug             | metadata-url                     | |------------------|------------------|----------------------------------| | My Cool Customer | my-cool-customer | /providers/my-cool-customer/meta |
+
+**» type**: - `saml`: for inbound saml flows with desired **IDP**
+- `openidconnect`: for inbound oidc-flows with desired **OP**
+- `openidconnect-oxd`: for inbound oidc flows using **oxd**
+- `oauth`: for inbound oAuth flow with desired AS
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» type|saml|
+|» type|openidconnect|
+|» type|openidconnect-oxd|
+|» type|oauth|
+
+> Example responses
+
+> 201 Response
+
+```json
+{
+  "id": 0,
+  "slug": "string",
+  "displayName": "My Cool Customer",
+  "type": "saml",
+  "mapping": "saml_ldap_profile",
+  "passportStrategyId": "passport-saml",
+  "enabled": true,
+  "callbackUrl": "string",
+  "requestForEmail": true,
+  "emailLinkingSafe": true,
+  "authzParams": "string",
+  "logoPath": "string",
+  "options": {
+    "skipRequestCompression": "true,",
+    "authnRequestBinding": "HTTP-POST,",
+    "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient,",
+    "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=,",
+    "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO,",
+    "issuer": "urn:test:default"
+  },
+  "idpInitiated": {
+    "enabled": true,
+    "response_type": "code",
+    "scope": "openid profile"
+  }
+}
+```
+
+<h3 id="createprovider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|405|[Method Not Allowed](https://tools.ietf.org/html/rfc7231#section-6.5.5)|Invalid input|None|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Provider](#schemaprovider)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|None|
+|5XX|Unknown|Unexpected error|None|
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|201|Location|string||none|
+
+<aside class="success">
+This operation does not require authentication
 </aside>
 
-## updatePet
+## getProvider
 
-<a id="opIdupdatePet"></a>
+<a id="opIdgetProvider"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X PUT http://petstore.swagger.io/v2/pet \
-  -H 'Content-Type: application/json' \
-  -H 'Authorization: Bearer {access-token}'
+curl -X GET https://t1.techno24x7.com/providers/{providerId} \
+  -H 'Accept: application/json'
 
 ```
 
 ```http
-PUT http://petstore.swagger.io/v2/pet HTTP/1.1
-Host: petstore.swagger.io
+GET https://t1.techno24x7.com/providers/{providerId} HTTP/1.1
+Host: t1.techno24x7.com
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json'
+};
+
+fetch('https://t1.techno24x7.com/providers/{providerId}',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://t1.techno24x7.com/providers/{providerId}',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://t1.techno24x7.com/providers/{providerId}', headers = headers)
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://t1.techno24x7.com/providers/{providerId}', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("https://t1.techno24x7.com/providers/{providerId}");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://t1.techno24x7.com/providers/{providerId}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /providers/{providerId}`
+
+*get provider by id*
+
+This will return a provider
+
+<h3 id="getprovider-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|providerId|path|any|true|none|
+
+> Example responses
+
+> 200 Response
+
+```json
+{
+  "id": 0,
+  "slug": "string",
+  "displayName": "My Cool Customer",
+  "type": "saml",
+  "mapping": "saml_ldap_profile",
+  "passportStrategyId": "passport-saml",
+  "enabled": true,
+  "callbackUrl": "string",
+  "requestForEmail": true,
+  "emailLinkingSafe": true,
+  "authzParams": "string",
+  "logoPath": "string",
+  "options": {
+    "skipRequestCompression": "true,",
+    "authnRequestBinding": "HTTP-POST,",
+    "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient,",
+    "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=,",
+    "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO,",
+    "issuer": "urn:test:default"
+  },
+  "idpInitiated": {
+    "enabled": true,
+    "response_type": "code",
+    "scope": "openid profile"
+  }
+}
+```
+
+<h3 id="getprovider-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A provider object|[Provider](#schemaprovider)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
+|5XX|Unknown|Unexpected error|None|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## replaceProvider
+
+<a id="opIdreplaceProvider"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PUT https://t1.techno24x7.com/providers/{providerId} \
+  -H 'Content-Type: application/json' \
+  -H 'If-Match: string'
+
+```
+
+```http
+PUT https://t1.techno24x7.com/providers/{providerId} HTTP/1.1
+Host: t1.techno24x7.com
 Content-Type: application/json
+
+If-Match: string
 
 ```
 
 ```javascript
 const inputBody = '{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
+  "displayName": "My Cool Customer",
+  "type": "saml",
+  "mapping": "saml_ldap_profile",
+  "passportStrategyId": "passport-saml",
+  "enabled": true,
+  "requestForEmail": true,
+  "emailLinkingSafe": true,
+  "authzParams": "string",
+  "logoPath": "string",
+  "options": {
+    "skipRequestCompression": "true,",
+    "authnRequestBinding": "HTTP-POST,",
+    "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient,",
+    "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=,",
+    "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO,",
+    "issuer": "urn:test:default"
   },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
+  "idpInitiated": {
+    "enabled": true,
+    "response_type": "code",
+    "scope": "openid profile"
+  }
 }';
 const headers = {
   'Content-Type':'application/json',
-  'Authorization':'Bearer {access-token}'
+  'If-Match':'string'
 };
 
-fetch('http://petstore.swagger.io/v2/pet',
+fetch('https://t1.techno24x7.com/providers/{providerId}',
 {
   method: 'PUT',
   body: inputBody,
@@ -347,10 +848,10 @@ require 'json'
 
 headers = {
   'Content-Type' => 'application/json',
-  'Authorization' => 'Bearer {access-token}'
+  'If-Match' => 'string'
 }
 
-result = RestClient.put 'http://petstore.swagger.io/v2/pet',
+result = RestClient.put 'https://t1.techno24x7.com/providers/{providerId}',
   params: {
   }, headers: headers
 
@@ -362,10 +863,10 @@ p JSON.parse(result)
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Authorization': 'Bearer {access-token}'
+  'If-Match': 'string'
 }
 
-r = requests.put('http://petstore.swagger.io/v2/pet', headers = headers)
+r = requests.put('https://t1.techno24x7.com/providers/{providerId}', headers = headers)
 
 print(r.json())
 
@@ -378,7 +879,7 @@ require 'vendor/autoload.php';
 
 $headers = array(
     'Content-Type' => 'application/json',
-    'Authorization' => 'Bearer {access-token}',
+    'If-Match' => 'string',
 );
 
 $client = new \GuzzleHttp\Client();
@@ -387,7 +888,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('PUT','http://petstore.swagger.io/v2/pet', array(
+    $response = $client->request('PUT','https://t1.techno24x7.com/providers/{providerId}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -404,7 +905,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet");
+URL obj = new URL("https://t1.techno24x7.com/providers/{providerId}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -432,11 +933,11 @@ func main() {
 
     headers := map[string][]string{
         "Content-Type": []string{"application/json"},
-        "Authorization": []string{"Bearer {access-token}"},
+        "If-Match": []string{"string"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PUT", "http://petstore.swagger.io/v2/pet", data)
+    req, err := http.NewRequest("PUT", "https://t1.techno24x7.com/providers/{providerId}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -446,995 +947,134 @@ func main() {
 
 ```
 
-`PUT /pet`
+`PUT /providers/{providerId}`
 
-*Update an existing pet*
+*update provider*
+
+Updates corresponding provider replacing all it's data.
 
 > Body parameter
 
 ```json
 {
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
+  "displayName": "My Cool Customer",
+  "type": "saml",
+  "mapping": "saml_ldap_profile",
+  "passportStrategyId": "passport-saml",
+  "enabled": true,
+  "requestForEmail": true,
+  "emailLinkingSafe": true,
+  "authzParams": "string",
+  "logoPath": "string",
+  "options": {
+    "skipRequestCompression": "true,",
+    "authnRequestBinding": "HTTP-POST,",
+    "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient,",
+    "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=,",
+    "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO,",
+    "issuer": "urn:test:default"
   },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
+  "idpInitiated": {
+    "enabled": true,
+    "response_type": "code",
+    "scope": "openid profile"
+  }
 }
 ```
 
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Pet>
-  <id>0</id>
-  <category>
-    <id>0</id>
-    <name>string</name>
-  </category>
-  <name>doggie</name>
-  <photoUrls>string</photoUrls>
-  <tags>
-    <id>0</id>
-    <name>string</name>
-  </tags>
-  <status>available</status>
-</Pet>
-```
-
-<h3 id="updatepet-parameters">Parameters</h3>
+<h3 id="replaceprovider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[Pet](#schemapet)|true|Pet object that needs to be added to the store|
+|If-Match|header|string|false|Etag from the Provider being updated|
+|providerId|path|any|true|none|
+|body|body|[Provider](#schemaprovider)|false|none|
+|» id|body|integer(int64)|true|none|
+|» slug|body|string|false|Will be created based on displayName|
+|» displayName|body|string|true|Name displayed to users|
+|» type|body|string|true|- `saml`: for inbound saml flows with desired **IDP**|
+|» mapping|body|string|true|More infos about attributes mapping (here)[https://gluu.org/docs/gluu-server/4.2/authn-guide/passport/#attribute-mapping-and-transformation] LINK TO MAPPING ID|
+|» passportStrategyId|body|string|true|StrategyId text unique identifier|
+|» enabled|body|boolean|true|Defines if provider is enabled (true) or not (false)|
+|» callbackUrl|body|string|true|Passport provider callback Url. It's auto-generated.|
+|» requestForEmail|body|boolean|true|Enable request for e-mail feature, for more information please check gluu-passport docs.|
+|» emailLinkingSafe|body|boolean|true|Enable email linking feature, for more information please check gluu-passport docs.|
+|» authzParams|body|string|false|Usually may be left blank. It is used to supply the value for the second parameter of Passport.js method passport.authenticate|
+|» logoPath|body|string|false|path for the provider's logo file.|
+|» options|body|object|true|Providers' strategy options. Please check each strategy documentation for options.|
+|» idpInitiated|body|object|false|idp-initiated flow settings for provider|
+|»» enabled|body|boolean|true|Enable/Disable idp-initiated flow for this provider|
+|»» response_type|body|string|false|Response type requested to OIDC OP|
+|»» scope|body|string|false|scopes requested to OIDC OP separated by spaces|
 
-<h3 id="updatepet-responses">Responses</h3>
+#### Detailed descriptions
 
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Pet not found|None|
-|405|[Method Not Allowed](https://tools.ietf.org/html/rfc7231#section-6.5.5)|Validation exception|None|
+**» slug**: Will be created based on displayName
+Example:
+| Name             | slug             | metadata-url                     | |------------------|------------------|----------------------------------| | My Cool Customer | my-cool-customer | /providers/my-cool-customer/meta |
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-## findPetsByStatus
-
-<a id="opIdfindPetsByStatus"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/pet/findByStatus?status=available \
-  -H 'Accept: application/xml' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/pet/findByStatus?status=available HTTP/1.1
-Host: petstore.swagger.io
-Accept: application/xml
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/xml',
-  'Authorization':'Bearer {access-token}'
-};
-
-fetch('http://petstore.swagger.io/v2/pet/findByStatus?status=available',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/pet/findByStatus',
-  params: {
-  'status' => 'array[string]'
-}, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/pet/findByStatus', params={
-  'status': [
-  "available"
-]
-}, headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Accept' => 'application/xml',
-    'Authorization' => 'Bearer {access-token}',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','http://petstore.swagger.io/v2/pet/findByStatus', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/findByStatus?status=available");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-        "Authorization": []string{"Bearer {access-token}"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/pet/findByStatus", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /pet/findByStatus`
-
-*Finds Pets by status*
-
-Multiple status values can be provided with comma separated strings
-
-<h3 id="findpetsbystatus-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|status|query|array[string]|true|Status values that need to be considered for filter|
+**» type**: - `saml`: for inbound saml flows with desired **IDP**
+- `openidconnect`: for inbound oidc-flows with desired **OP**
+- `openidconnect-oxd`: for inbound oidc flows using **oxd**
+- `oauth`: for inbound oAuth flow with desired AS
 
 #### Enumerated Values
 
 |Parameter|Value|
 |---|---|
-|status|available|
-|status|pending|
-|status|sold|
+|» type|saml|
+|» type|openidconnect|
+|» type|openidconnect-oxd|
+|» type|oauth|
 
-> Example responses
-
-> 200 Response
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<id>0</id>
-<category>
-  <id>0</id>
-  <name>string</name>
-</category>
-<name>doggie</name>
-<photoUrls>string</photoUrls>
-<tags>
-  <id>0</id>
-  <name>string</name>
-</tags>
-<status>available</status>
-```
-
-```json
-[
-  {
-    "id": 0,
-    "category": {
-      "id": 0,
-      "name": "string"
-    },
-    "name": "doggie",
-    "photoUrls": [
-      "string"
-    ],
-    "tags": [
-      {
-        "id": 0,
-        "name": "string"
-      }
-    ],
-    "status": "available"
-  }
-]
-```
-
-<h3 id="findpetsbystatus-responses">Responses</h3>
+<h3 id="replaceprovider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid status value|None|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Corresponding provider updated with success|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
+|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict - Possibly simultaneous update caused by different Etag values|None|
+|5XX|Unknown|Unexpected error|None|
 
-<h3 id="findpetsbystatus-responseschema">Response Schema</h3>
+### Response Headers
 
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
+|Status|Header|Type|Format|Description|
 |---|---|---|---|---|
-|*anonymous*|[[Pet](#schemapet)]|false|none|none|
-|» id|integer(int64)|false|none|none|
-|» category|[Category](#schemacategory)|false|none|none|
-|»» id|integer(int64)|false|none|none|
-|»» name|string|false|none|none|
-|» name|string|true|none|none|
-|» photoUrls|[string]|true|none|none|
-|» tags|[[Tag](#schematag)]|false|none|none|
-|»» id|integer(int64)|false|none|none|
-|»» name|string|false|none|none|
-|» status|string|false|none|pet status in the store|
+|204|Etag|string||actual Etag from the updated Provider ressource|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|status|available|
-|status|pending|
-|status|sold|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
+<aside class="success">
+This operation does not require authentication
 </aside>
 
-## findPetsByTags
+## deleteProvider
 
-<a id="opIdfindPetsByTags"></a>
+<a id="opIddeleteProvider"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET http://petstore.swagger.io/v2/pet/findByTags?tags=string \
-  -H 'Accept: application/xml' \
-  -H 'Authorization: Bearer {access-token}'
+curl -X DELETE https://t1.techno24x7.com/providers/{providerId} \
+  -H 'If-Match: string'
 
 ```
 
 ```http
-GET http://petstore.swagger.io/v2/pet/findByTags?tags=string HTTP/1.1
-Host: petstore.swagger.io
-Accept: application/xml
+DELETE https://t1.techno24x7.com/providers/{providerId} HTTP/1.1
+Host: t1.techno24x7.com
+
+If-Match: string
 
 ```
 
 ```javascript
 
 const headers = {
-  'Accept':'application/xml',
-  'Authorization':'Bearer {access-token}'
+  'If-Match':'string'
 };
 
-fetch('http://petstore.swagger.io/v2/pet/findByTags?tags=string',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/pet/findByTags',
-  params: {
-  'tags' => 'array[string]'
-}, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/pet/findByTags', params={
-  'tags': [
-  "string"
-]
-}, headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Accept' => 'application/xml',
-    'Authorization' => 'Bearer {access-token}',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','http://petstore.swagger.io/v2/pet/findByTags', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/findByTags?tags=string");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-        "Authorization": []string{"Bearer {access-token}"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/pet/findByTags", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /pet/findByTags`
-
-*Finds Pets by tags*
-
-Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
-
-<h3 id="findpetsbytags-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|tags|query|array[string]|true|Tags to filter by|
-
-> Example responses
-
-> 200 Response
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<id>0</id>
-<category>
-  <id>0</id>
-  <name>string</name>
-</category>
-<name>doggie</name>
-<photoUrls>string</photoUrls>
-<tags>
-  <id>0</id>
-  <name>string</name>
-</tags>
-<status>available</status>
-```
-
-```json
-[
-  {
-    "id": 0,
-    "category": {
-      "id": 0,
-      "name": "string"
-    },
-    "name": "doggie",
-    "photoUrls": [
-      "string"
-    ],
-    "tags": [
-      {
-        "id": 0,
-        "name": "string"
-      }
-    ],
-    "status": "available"
-  }
-]
-```
-
-<h3 id="findpetsbytags-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid tag value|None|
-
-<h3 id="findpetsbytags-responseschema">Response Schema</h3>
-
-Status Code **200**
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|*anonymous*|[[Pet](#schemapet)]|false|none|none|
-|» id|integer(int64)|false|none|none|
-|» category|[Category](#schemacategory)|false|none|none|
-|»» id|integer(int64)|false|none|none|
-|»» name|string|false|none|none|
-|» name|string|true|none|none|
-|» photoUrls|[string]|true|none|none|
-|» tags|[[Tag](#schematag)]|false|none|none|
-|»» id|integer(int64)|false|none|none|
-|»» name|string|false|none|none|
-|» status|string|false|none|pet status in the store|
-
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|status|available|
-|status|pending|
-|status|sold|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-## getPetById
-
-<a id="opIdgetPetById"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/pet/{petId} \
-  -H 'Accept: application/xml' \
-  -H 'api_key: API_KEY'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/pet/{petId} HTTP/1.1
-Host: petstore.swagger.io
-Accept: application/xml
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/xml',
-  'api_key':'API_KEY'
-};
-
-fetch('http://petstore.swagger.io/v2/pet/{petId}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml',
-  'api_key' => 'API_KEY'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/pet/{petId}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml',
-  'api_key': 'API_KEY'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/pet/{petId}', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Accept' => 'application/xml',
-    'api_key' => 'API_KEY',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','http://petstore.swagger.io/v2/pet/{petId}', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/{petId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-        "api_key": []string{"API_KEY"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/pet/{petId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /pet/{petId}`
-
-*Find pet by ID*
-
-Returns a single pet
-
-<h3 id="getpetbyid-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|petId|path|integer(int64)|true|ID of pet to return|
-
-> Example responses
-
-> 200 Response
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Pet>
-  <id>0</id>
-  <category>
-    <id>0</id>
-    <name>string</name>
-  </category>
-  <name>doggie</name>
-  <photoUrls>string</photoUrls>
-  <tags>
-    <id>0</id>
-    <name>string</name>
-  </tags>
-  <status>available</status>
-</Pet>
-```
-
-```json
-{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
-  },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
-}
-```
-
-<h3 id="getpetbyid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[Pet](#schemapet)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Pet not found|None|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
-</aside>
-
-## updatePetWithForm
-
-<a id="opIdupdatePetWithForm"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/pet/{petId} \
-  -H 'Content-Type: application/x-www-form-urlencoded' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/pet/{petId} HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/x-www-form-urlencoded
-
-```
-
-```javascript
-const inputBody = '{
-  "name": "string",
-  "status": "string"
-}';
-const headers = {
-  'Content-Type':'application/x-www-form-urlencoded',
-  'Authorization':'Bearer {access-token}'
-};
-
-fetch('http://petstore.swagger.io/v2/pet/{petId}',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/x-www-form-urlencoded',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/pet/{petId}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/x-www-form-urlencoded',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/pet/{petId}', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Content-Type' => 'application/x-www-form-urlencoded',
-    'Authorization' => 'Bearer {access-token}',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('POST','http://petstore.swagger.io/v2/pet/{petId}', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/{petId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/x-www-form-urlencoded"},
-        "Authorization": []string{"Bearer {access-token}"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/pet/{petId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /pet/{petId}`
-
-*Updates a pet in the store with form data*
-
-> Body parameter
-
-```yaml
-name: string
-status: string
-
-```
-
-<h3 id="updatepetwithform-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|petId|path|integer(int64)|true|ID of pet that needs to be updated|
-|body|body|object|false|none|
-|» name|body|string|false|Updated name of the pet|
-|» status|body|string|false|Updated status of the pet|
-
-<h3 id="updatepetwithform-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|405|[Method Not Allowed](https://tools.ietf.org/html/rfc7231#section-6.5.5)|Invalid input|None|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-## deletePet
-
-<a id="opIddeletePet"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE http://petstore.swagger.io/v2/pet/{petId} \
-  -H 'api_key: string' \
-  -H 'Authorization: Bearer {access-token}'
-
-```
-
-```http
-DELETE http://petstore.swagger.io/v2/pet/{petId} HTTP/1.1
-Host: petstore.swagger.io
-
-api_key: string
-
-```
-
-```javascript
-
-const headers = {
-  'api_key':'string',
-  'Authorization':'Bearer {access-token}'
-};
-
-fetch('http://petstore.swagger.io/v2/pet/{petId}',
+fetch('https://t1.techno24x7.com/providers/{providerId}',
 {
   method: 'DELETE',
 
@@ -1453,11 +1093,10 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'api_key' => 'string',
-  'Authorization' => 'Bearer {access-token}'
+  'If-Match' => 'string'
 }
 
-result = RestClient.delete 'http://petstore.swagger.io/v2/pet/{petId}',
+result = RestClient.delete 'https://t1.techno24x7.com/providers/{providerId}',
   params: {
   }, headers: headers
 
@@ -1468,11 +1107,10 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'api_key': 'string',
-  'Authorization': 'Bearer {access-token}'
+  'If-Match': 'string'
 }
 
-r = requests.delete('http://petstore.swagger.io/v2/pet/{petId}', headers = headers)
+r = requests.delete('https://t1.techno24x7.com/providers/{providerId}', headers = headers)
 
 print(r.json())
 
@@ -1484,8 +1122,7 @@ print(r.json())
 require 'vendor/autoload.php';
 
 $headers = array(
-    'api_key' => 'string',
-    'Authorization' => 'Bearer {access-token}',
+    'If-Match' => 'string',
 );
 
 $client = new \GuzzleHttp\Client();
@@ -1494,7 +1131,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('DELETE','http://petstore.swagger.io/v2/pet/{petId}', array(
+    $response = $client->request('DELETE','https://t1.techno24x7.com/providers/{providerId}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -1511,7 +1148,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/{petId}");
+URL obj = new URL("https://t1.techno24x7.com/providers/{providerId}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -1538,12 +1175,11 @@ import (
 func main() {
 
     headers := map[string][]string{
-        "api_key": []string{"string"},
-        "Authorization": []string{"Bearer {access-token}"},
+        "If-Match": []string{"string"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "http://petstore.swagger.io/v2/pet/{petId}", data)
+    req, err := http.NewRequest("DELETE", "https://t1.techno24x7.com/providers/{providerId}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1553,251 +1189,58 @@ func main() {
 
 ```
 
-`DELETE /pet/{petId}`
+`DELETE /providers/{providerId}`
 
-*Deletes a pet*
+*delete provider*
 
-<h3 id="deletepet-parameters">Parameters</h3>
+Deletes corresponding provider
+
+<h3 id="deleteprovider-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|api_key|header|string|false|none|
-|petId|path|integer(int64)|true|Pet id to delete|
+|If-Match|header|string|false|Etag from the Provider being updated|
+|providerId|path|any|true|none|
 
-<h3 id="deletepet-responses">Responses</h3>
+<h3 id="deleteprovider-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Pet not found|None|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Corresponding Provider deleted with success|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
+|5XX|Unknown|Unexpected error|None|
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|204|Etag|string||actual Etag from the deleted Provider ressource|
+
+<aside class="success">
+This operation does not require authentication
 </aside>
 
-## uploadFile
+<h1 id="nu-passport-mappings">mappings</h1>
 
-<a id="opIduploadFile"></a>
+Manage gluu-passport mappings
+
+## getAllMappings
+
+<a id="opIdgetAllMappings"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X POST http://petstore.swagger.io/v2/pet/{petId}/uploadImage \
-  -H 'Content-Type: multipart/form-data' \
-  -H 'Accept: application/json' \
-  -H 'Authorization: Bearer {access-token}'
+curl -X GET https://t1.techno24x7.com/mappings \
+  -H 'Accept: application/json'
 
 ```
 
 ```http
-POST http://petstore.swagger.io/v2/pet/{petId}/uploadImage HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: multipart/form-data
-Accept: application/json
-
-```
-
-```javascript
-const inputBody = '{
-  "additionalMetadata": "string",
-  "file": "string"
-}';
-const headers = {
-  'Content-Type':'multipart/form-data',
-  'Accept':'application/json',
-  'Authorization':'Bearer {access-token}'
-};
-
-fetch('http://petstore.swagger.io/v2/pet/{petId}/uploadImage',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'multipart/form-data',
-  'Accept' => 'application/json',
-  'Authorization' => 'Bearer {access-token}'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/pet/{petId}/uploadImage',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'multipart/form-data',
-  'Accept': 'application/json',
-  'Authorization': 'Bearer {access-token}'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/pet/{petId}/uploadImage', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Content-Type' => 'multipart/form-data',
-    'Accept' => 'application/json',
-    'Authorization' => 'Bearer {access-token}',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('POST','http://petstore.swagger.io/v2/pet/{petId}/uploadImage', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/pet/{petId}/uploadImage");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"multipart/form-data"},
-        "Accept": []string{"application/json"},
-        "Authorization": []string{"Bearer {access-token}"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/pet/{petId}/uploadImage", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /pet/{petId}/uploadImage`
-
-*uploads an image*
-
-> Body parameter
-
-```yaml
-additionalMetadata: string
-file: string
-
-```
-
-<h3 id="uploadfile-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|petId|path|integer(int64)|true|ID of pet to update|
-|body|body|object|false|none|
-|» additionalMetadata|body|string|false|Additional data to pass to server|
-|» file|body|string(binary)|false|file to upload|
-
-> Example responses
-
-> 200 Response
-
-```json
-{
-  "code": 0,
-  "type": "string",
-  "message": "string"
-}
-```
-
-<h3 id="uploadfile-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[ApiResponse](#schemaapiresponse)|
-
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-petstore_auth ( Scopes: write:pets read:pets )
-</aside>
-
-<h1 id="swagger-petstore-store">store</h1>
-
-Access to Petstore orders
-
-## getInventory
-
-<a id="opIdgetInventory"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/store/inventory \
-  -H 'Accept: application/json' \
-  -H 'api_key: API_KEY'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/store/inventory HTTP/1.1
-Host: petstore.swagger.io
+GET https://t1.techno24x7.com/mappings HTTP/1.1
+Host: t1.techno24x7.com
 Accept: application/json
 
 ```
@@ -1805,11 +1248,10 @@ Accept: application/json
 ```javascript
 
 const headers = {
-  'Accept':'application/json',
-  'api_key':'API_KEY'
+  'Accept':'application/json'
 };
 
-fetch('http://petstore.swagger.io/v2/store/inventory',
+fetch('https://t1.techno24x7.com/mappings',
 {
   method: 'GET',
 
@@ -1828,11 +1270,10 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/json',
-  'api_key' => 'API_KEY'
+  'Accept' => 'application/json'
 }
 
-result = RestClient.get 'http://petstore.swagger.io/v2/store/inventory',
+result = RestClient.get 'https://t1.techno24x7.com/mappings',
   params: {
   }, headers: headers
 
@@ -1843,11 +1284,10 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/json',
-  'api_key': 'API_KEY'
+  'Accept': 'application/json'
 }
 
-r = requests.get('http://petstore.swagger.io/v2/store/inventory', headers = headers)
+r = requests.get('https://t1.techno24x7.com/mappings', headers = headers)
 
 print(r.json())
 
@@ -1860,7 +1300,6 @@ require 'vendor/autoload.php';
 
 $headers = array(
     'Accept' => 'application/json',
-    'api_key' => 'API_KEY',
 );
 
 $client = new \GuzzleHttp\Client();
@@ -1869,7 +1308,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','http://petstore.swagger.io/v2/store/inventory', array(
+    $response = $client->request('GET','https://t1.techno24x7.com/mappings', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -1886,7 +1325,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("http://petstore.swagger.io/v2/store/inventory");
+URL obj = new URL("https://t1.techno24x7.com/mappings");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -1914,11 +1353,10 @@ func main() {
 
     headers := map[string][]string{
         "Accept": []string{"application/json"},
-        "api_key": []string{"API_KEY"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/store/inventory", data)
+    req, err := http.NewRequest("GET", "https://t1.techno24x7.com/mappings", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -1928,79 +1366,113 @@ func main() {
 
 ```
 
-`GET /store/inventory`
+`GET /mappings`
 
-*Returns pet inventories by status*
+*get all mappings*
 
-Returns a map of status codes to quantities
+Return an array of all mappings
 
 > Example responses
 
 > 200 Response
 
 ```json
-{
-  "property1": 0,
-  "property2": 0
-}
+[
+  {
+    "id": 14,
+    "name": "saml_ldap_profile",
+    "passportStrategyId": "passport_saml",
+    "mapping": {
+      "uid": "urn:oid:0.9.2342.19200300.100.1.1",
+      "mail": [
+        "email",
+        "urn:oid:0.9.2342.19200300.100.1.3",
+        "urn:oid:1.2.840.113549.1.9.1"
+      ],
+      "cn": "urn:oid:2.16.840.1.113730.3.1.241",
+      "displayName": "urn:oid:2.16.840.1.113730.3.1.241",
+      "givenName": "urn:oid:2.5.4.42",
+      "sn": "urn:oid:2.5.4.4"
+    }
+  }
+]
 ```
 
-<h3 id="getinventory-responses">Responses</h3>
+<h3 id="getallmappings-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|Inline|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|An array of mappings|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
 
-<h3 id="getinventory-responseschema">Response Schema</h3>
+<h3 id="getallmappings-responseschema">Response Schema</h3>
 
 Status Code **200**
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|» **additionalProperties**|integer(int32)|false|none|none|
+|*anonymous*|[[Mapping](#schemamapping)]|false|none|none|
+|» id|integer(int64)|true|read-only|none|
+|» name|string|true|none|Mapping name|
+|» passportStrategyId|string|true|none|Related passport strategy id|
+|» mapping|object|true|none|Mapping with key (Gluu/LDAP) / value (mapping profile). Check example.|
 
-<aside class="warning">
-To perform this operation, you must be authenticated by means of one of the following methods:
-api_key
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|x-next|string||A link to the next page of responses|
+
+<aside class="success">
+This operation does not require authentication
 </aside>
 
-## placeOrder
+## createMapping
 
-<a id="opIdplaceOrder"></a>
+<a id="opIdcreateMapping"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X POST http://petstore.swagger.io/v2/store/order \
+curl -X POST https://t1.techno24x7.com/mappings \
   -H 'Content-Type: application/json' \
-  -H 'Accept: application/xml'
+  -H 'Accept: application/json'
 
 ```
 
 ```http
-POST http://petstore.swagger.io/v2/store/order HTTP/1.1
-Host: petstore.swagger.io
+POST https://t1.techno24x7.com/mappings HTTP/1.1
+Host: t1.techno24x7.com
 Content-Type: application/json
-Accept: application/xml
+Accept: application/json
 
 ```
 
 ```javascript
 const inputBody = '{
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2020-03-30T14:38:05Z",
-  "status": "placed",
-  "complete": false
+  "name": "saml_ldap_profile",
+  "passportStrategyId": "passport_saml",
+  "mapping": {
+    "uid": "urn:oid:0.9.2342.19200300.100.1.1",
+    "mail": [
+      "email",
+      "urn:oid:0.9.2342.19200300.100.1.3",
+      "urn:oid:1.2.840.113549.1.9.1"
+    ],
+    "cn": "urn:oid:2.16.840.1.113730.3.1.241",
+    "displayName": "urn:oid:2.16.840.1.113730.3.1.241",
+    "givenName": "urn:oid:2.5.4.42",
+    "sn": "urn:oid:2.5.4.4"
+  }
 }';
 const headers = {
   'Content-Type':'application/json',
-  'Accept':'application/xml'
+  'Accept':'application/json'
 };
 
-fetch('http://petstore.swagger.io/v2/store/order',
+fetch('https://t1.techno24x7.com/mappings',
 {
   method: 'POST',
   body: inputBody,
@@ -2020,10 +1492,10 @@ require 'json'
 
 headers = {
   'Content-Type' => 'application/json',
-  'Accept' => 'application/xml'
+  'Accept' => 'application/json'
 }
 
-result = RestClient.post 'http://petstore.swagger.io/v2/store/order',
+result = RestClient.post 'https://t1.techno24x7.com/mappings',
   params: {
   }, headers: headers
 
@@ -2035,10 +1507,10 @@ p JSON.parse(result)
 import requests
 headers = {
   'Content-Type': 'application/json',
-  'Accept': 'application/xml'
+  'Accept': 'application/json'
 }
 
-r = requests.post('http://petstore.swagger.io/v2/store/order', headers = headers)
+r = requests.post('https://t1.techno24x7.com/mappings', headers = headers)
 
 print(r.json())
 
@@ -2051,7 +1523,7 @@ require 'vendor/autoload.php';
 
 $headers = array(
     'Content-Type' => 'application/json',
-    'Accept' => 'application/xml',
+    'Accept' => 'application/json',
 );
 
 $client = new \GuzzleHttp\Client();
@@ -2060,7 +1532,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('POST','http://petstore.swagger.io/v2/store/order', array(
+    $response = $client->request('POST','https://t1.techno24x7.com/mappings', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -2077,7 +1549,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("http://petstore.swagger.io/v2/store/order");
+URL obj = new URL("https://t1.techno24x7.com/mappings");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("POST");
 int responseCode = con.getResponseCode();
@@ -2105,11 +1577,11 @@ func main() {
 
     headers := map[string][]string{
         "Content-Type": []string{"application/json"},
-        "Accept": []string{"application/xml"},
+        "Accept": []string{"application/json"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/store/order", data)
+    req, err := http.NewRequest("POST", "https://t1.techno24x7.com/mappings", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -2119,1314 +1591,112 @@ func main() {
 
 ```
 
-`POST /store/order`
+`POST /mappings`
 
-*Place an order for a pet*
+*creates mapping*
+
+Create a new mapping
 
 > Body parameter
 
 ```json
 {
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2020-03-30T14:38:05Z",
-  "status": "placed",
-  "complete": false
+  "name": "saml_ldap_profile",
+  "passportStrategyId": "passport_saml",
+  "mapping": {
+    "uid": "urn:oid:0.9.2342.19200300.100.1.1",
+    "mail": [
+      "email",
+      "urn:oid:0.9.2342.19200300.100.1.3",
+      "urn:oid:1.2.840.113549.1.9.1"
+    ],
+    "cn": "urn:oid:2.16.840.1.113730.3.1.241",
+    "displayName": "urn:oid:2.16.840.1.113730.3.1.241",
+    "givenName": "urn:oid:2.5.4.42",
+    "sn": "urn:oid:2.5.4.4"
+  }
 }
 ```
 
-<h3 id="placeorder-parameters">Parameters</h3>
+<h3 id="createmapping-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|body|body|[Order](#schemaorder)|true|order placed for purchasing the pet|
+|body|body|[Mapping](#schemamapping)|false|none|
+|» id|body|integer(int64)|true|none|
+|» name|body|string|true|Mapping name|
+|» passportStrategyId|body|string|true|Related passport strategy id|
+|» mapping|body|object|true|Mapping with key (Gluu/LDAP) / value (mapping profile). Check example.|
 
 > Example responses
 
-> 200 Response
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Order>
-  <id>0</id>
-  <petId>0</petId>
-  <quantity>0</quantity>
-  <shipDate>2020-03-30T14:38:05Z</shipDate>
-  <status>placed</status>
-  <complete>false</complete>
-</Order>
-```
+> 201 Response
 
 ```json
 {
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2020-03-30T14:38:05Z",
-  "status": "placed",
-  "complete": false
-}
-```
-
-<h3 id="placeorder-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[Order](#schemaorder)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid Order|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getOrderById
-
-<a id="opIdgetOrderById"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/store/order/{orderId} \
-  -H 'Accept: application/xml'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/store/order/{orderId} HTTP/1.1
-Host: petstore.swagger.io
-Accept: application/xml
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/xml'
-};
-
-fetch('http://petstore.swagger.io/v2/store/order/{orderId}',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/store/order/{orderId}',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/store/order/{orderId}', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Accept' => 'application/xml',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','http://petstore.swagger.io/v2/store/order/{orderId}', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/store/order/{orderId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/store/order/{orderId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /store/order/{orderId}`
-
-*Find purchase order by ID*
-
-For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
-
-<h3 id="getorderbyid-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|orderId|path|integer(int64)|true|ID of pet that needs to be fetched|
-
-> Example responses
-
-> 200 Response
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<Order>
-  <id>0</id>
-  <petId>0</petId>
-  <quantity>0</quantity>
-  <shipDate>2020-03-30T14:38:05Z</shipDate>
-  <status>placed</status>
-  <complete>false</complete>
-</Order>
-```
-
-```json
-{
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2020-03-30T14:38:05Z",
-  "status": "placed",
-  "complete": false
-}
-```
-
-<h3 id="getorderbyid-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[Order](#schemaorder)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Order not found|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## deleteOrder
-
-<a id="opIddeleteOrder"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X DELETE http://petstore.swagger.io/v2/store/order/{orderId}
-
-```
-
-```http
-DELETE http://petstore.swagger.io/v2/store/order/{orderId} HTTP/1.1
-Host: petstore.swagger.io
-
-```
-
-```javascript
-
-fetch('http://petstore.swagger.io/v2/store/order/{orderId}',
-{
-  method: 'DELETE'
-
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-result = RestClient.delete 'http://petstore.swagger.io/v2/store/order/{orderId}',
-  params: {
+  "id": 14,
+  "name": "saml_ldap_profile",
+  "passportStrategyId": "passport_saml",
+  "mapping": {
+    "uid": "urn:oid:0.9.2342.19200300.100.1.1",
+    "mail": [
+      "email",
+      "urn:oid:0.9.2342.19200300.100.1.3",
+      "urn:oid:1.2.840.113549.1.9.1"
+    ],
+    "cn": "urn:oid:2.16.840.1.113730.3.1.241",
+    "displayName": "urn:oid:2.16.840.1.113730.3.1.241",
+    "givenName": "urn:oid:2.5.4.42",
+    "sn": "urn:oid:2.5.4.4"
   }
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-
-r = requests.delete('http://petstore.swagger.io/v2/store/order/{orderId}')
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('DELETE','http://petstore.swagger.io/v2/store/order/{orderId}', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/store/order/{orderId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("DELETE");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
 }
-in.close();
-System.out.println(response.toString());
-
 ```
 
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "http://petstore.swagger.io/v2/store/order/{orderId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`DELETE /store/order/{orderId}`
-
-*Delete purchase order by ID*
-
-For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
-
-<h3 id="deleteorder-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|orderId|path|integer(int64)|true|ID of the order that needs to be deleted|
-
-<h3 id="deleteorder-responses">Responses</h3>
+<h3 id="createmapping-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid ID supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Order not found|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-<h1 id="swagger-petstore-user">user</h1>
-
-Operations about user
-
-<a href="http://swagger.io">Find out more about our store</a>
-
-## createUser
-
-<a id="opIdcreateUser"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/user \
-  -H 'Content-Type: application/json'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/user HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
-
-```
-
-```javascript
-const inputBody = '{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
-}';
-const headers = {
-  'Content-Type':'application/json'
-};
-
-fetch('http://petstore.swagger.io/v2/user',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/user',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/user', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Content-Type' => 'application/json',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('POST','http://petstore.swagger.io/v2/user', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/user", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /user`
-
-*Create user*
-
-This can only be done by the logged in user.
-
-> Body parameter
-
-```json
-{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
-}
-```
-
-<h3 id="createuser-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[User](#schemauser)|true|Created user object|
-
-<h3 id="createuser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|successful operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## createUsersWithArrayInput
-
-<a id="opIdcreateUsersWithArrayInput"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/user/createWithArray \
-  -H 'Content-Type: application/json'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/user/createWithArray HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
-
-```
-
-```javascript
-const inputBody = '[
-  {
-    "id": 0,
-    "username": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "password": "string",
-    "phone": "string",
-    "userStatus": 0
-  }
-]';
-const headers = {
-  'Content-Type':'application/json'
-};
-
-fetch('http://petstore.swagger.io/v2/user/createWithArray',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/user/createWithArray',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/user/createWithArray', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Content-Type' => 'application/json',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('POST','http://petstore.swagger.io/v2/user/createWithArray', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/createWithArray");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/user/createWithArray", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /user/createWithArray`
-
-*Creates list of users with given input array*
-
-> Body parameter
-
-```json
-[
-  {
-    "id": 0,
-    "username": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "password": "string",
-    "phone": "string",
-    "userStatus": 0
-  }
-]
-```
-
-<h3 id="createuserswitharrayinput-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[User](#schemauser)|true|List of user object|
-
-<h3 id="createuserswitharrayinput-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|successful operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## createUsersWithListInput
-
-<a id="opIdcreateUsersWithListInput"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X POST http://petstore.swagger.io/v2/user/createWithList \
-  -H 'Content-Type: application/json'
-
-```
-
-```http
-POST http://petstore.swagger.io/v2/user/createWithList HTTP/1.1
-Host: petstore.swagger.io
-Content-Type: application/json
-
-```
-
-```javascript
-const inputBody = '[
-  {
-    "id": 0,
-    "username": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "password": "string",
-    "phone": "string",
-    "userStatus": 0
-  }
-]';
-const headers = {
-  'Content-Type':'application/json'
-};
-
-fetch('http://petstore.swagger.io/v2/user/createWithList',
-{
-  method: 'POST',
-  body: inputBody,
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Content-Type' => 'application/json'
-}
-
-result = RestClient.post 'http://petstore.swagger.io/v2/user/createWithList',
-  params: {
-  }, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json'
-}
-
-r = requests.post('http://petstore.swagger.io/v2/user/createWithList', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Content-Type' => 'application/json',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('POST','http://petstore.swagger.io/v2/user/createWithList', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/createWithList");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://petstore.swagger.io/v2/user/createWithList", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`POST /user/createWithList`
-
-*Creates list of users with given input array*
-
-> Body parameter
-
-```json
-[
-  {
-    "id": 0,
-    "username": "string",
-    "firstName": "string",
-    "lastName": "string",
-    "email": "string",
-    "password": "string",
-    "phone": "string",
-    "userStatus": 0
-  }
-]
-```
-
-<h3 id="createuserswithlistinput-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[User](#schemauser)|true|List of user object|
-
-<h3 id="createuserswithlistinput-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|successful operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## loginUser
-
-<a id="opIdloginUser"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/user/login?username=string&password=pa%24%24word \
-  -H 'Accept: application/xml'
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/user/login?username=string&password=pa%24%24word HTTP/1.1
-Host: petstore.swagger.io
-Accept: application/xml
-
-```
-
-```javascript
-
-const headers = {
-  'Accept':'application/xml'
-};
-
-fetch('http://petstore.swagger.io/v2/user/login?username=string&password=pa%24%24word',
-{
-  method: 'GET',
-
-  headers: headers
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-headers = {
-  'Accept' => 'application/xml'
-}
-
-result = RestClient.get 'http://petstore.swagger.io/v2/user/login',
-  params: {
-  'username' => 'string',
-'password' => 'string(password)'
-}, headers: headers
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/xml'
-}
-
-r = requests.get('http://petstore.swagger.io/v2/user/login', params={
-  'username': 'string',  'password': 'pa$$word'
-}, headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Accept' => 'application/xml',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','http://petstore.swagger.io/v2/user/login', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/login?username=string&password=pa%24%24word");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/xml"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/user/login", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /user/login`
-
-*Logs user into the system*
-
-<h3 id="loginuser-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|username|query|string|true|The user name for login|
-|password|query|string(password)|true|The password for login in clear text|
-
-> Example responses
-
-> 200 Response
-
-```json
-"string"
-```
-
-<h3 id="loginuser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|string|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid username/password supplied|None|
+|201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|Created|[Mapping](#schemamapping)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|None|
+|5XX|Unknown|Unexpected error|None|
 
 ### Response Headers
 
 |Status|Header|Type|Format|Description|
 |---|---|---|---|---|
-|200|X-Rate-Limit|integer|int32|calls per hour allowed by the user|
-|200|X-Expires-After|string|date-time|date in UTC when token expires|
+|201|Location|string||none|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## logoutUser
+## getMapping
 
-<a id="opIdlogoutUser"></a>
-
-> Code samples
-
-```shell
-# You can also use wget
-curl -X GET http://petstore.swagger.io/v2/user/logout
-
-```
-
-```http
-GET http://petstore.swagger.io/v2/user/logout HTTP/1.1
-Host: petstore.swagger.io
-
-```
-
-```javascript
-
-fetch('http://petstore.swagger.io/v2/user/logout',
-{
-  method: 'GET'
-
-})
-.then(function(res) {
-    return res.json();
-}).then(function(body) {
-    console.log(body);
-});
-
-```
-
-```ruby
-require 'rest-client'
-require 'json'
-
-result = RestClient.get 'http://petstore.swagger.io/v2/user/logout',
-  params: {
-  }
-
-p JSON.parse(result)
-
-```
-
-```python
-import requests
-
-r = requests.get('http://petstore.swagger.io/v2/user/logout')
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','http://petstore.swagger.io/v2/user/logout', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/logout");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/user/logout", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
-
-```
-
-`GET /user/logout`
-
-*Logs out current logged in user session*
-
-<h3 id="logoutuser-responses">Responses</h3>
-
-|Status|Meaning|Description|Schema|
-|---|---|---|---|
-|default|Default|successful operation|None|
-
-<aside class="success">
-This operation does not require authentication
-</aside>
-
-## getUserByName
-
-<a id="opIdgetUserByName"></a>
+<a id="opIdgetMapping"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X GET http://petstore.swagger.io/v2/user/{username} \
-  -H 'Accept: application/xml'
+curl -X GET https://t1.techno24x7.com/mappings/{mappingId} \
+  -H 'Accept: application/json'
 
 ```
 
 ```http
-GET http://petstore.swagger.io/v2/user/{username} HTTP/1.1
-Host: petstore.swagger.io
-Accept: application/xml
+GET https://t1.techno24x7.com/mappings/{mappingId} HTTP/1.1
+Host: t1.techno24x7.com
+Accept: application/json
 
 ```
 
 ```javascript
 
 const headers = {
-  'Accept':'application/xml'
+  'Accept':'application/json'
 };
 
-fetch('http://petstore.swagger.io/v2/user/{username}',
+fetch('https://t1.techno24x7.com/mappings/{mappingId}',
 {
   method: 'GET',
 
@@ -3445,10 +1715,10 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Accept' => 'application/xml'
+  'Accept' => 'application/json'
 }
 
-result = RestClient.get 'http://petstore.swagger.io/v2/user/{username}',
+result = RestClient.get 'https://t1.techno24x7.com/mappings/{mappingId}',
   params: {
   }, headers: headers
 
@@ -3459,10 +1729,10 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Accept': 'application/xml'
+  'Accept': 'application/json'
 }
 
-r = requests.get('http://petstore.swagger.io/v2/user/{username}', headers = headers)
+r = requests.get('https://t1.techno24x7.com/mappings/{mappingId}', headers = headers)
 
 print(r.json())
 
@@ -3474,7 +1744,7 @@ print(r.json())
 require 'vendor/autoload.php';
 
 $headers = array(
-    'Accept' => 'application/xml',
+    'Accept' => 'application/json',
 );
 
 $client = new \GuzzleHttp\Client();
@@ -3483,7 +1753,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('GET','http://petstore.swagger.io/v2/user/{username}', array(
+    $response = $client->request('GET','https://t1.techno24x7.com/mappings/{mappingId}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -3500,7 +1770,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/{username}");
+URL obj = new URL("https://t1.techno24x7.com/mappings/{mappingId}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("GET");
 int responseCode = con.getResponseCode();
@@ -3527,11 +1797,11 @@ import (
 func main() {
 
     headers := map[string][]string{
-        "Accept": []string{"application/xml"},
+        "Accept": []string{"application/json"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://petstore.swagger.io/v2/user/{username}", data)
+    req, err := http.NewRequest("GET", "https://t1.techno24x7.com/mappings/{mappingId}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3541,95 +1811,111 @@ func main() {
 
 ```
 
-`GET /user/{username}`
+`GET /mappings/{mappingId}`
 
-*Get user by user name*
+*get mapping by id*
 
-<h3 id="getuserbyname-parameters">Parameters</h3>
+This will return a mapping object
+
+<h3 id="getmapping-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|username|path|string|true|The name that needs to be fetched. Use user1 for testing. |
+|mappingId|path|string|true|none|
 
 > Example responses
 
 > 200 Response
 
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-<User>
-  <id>0</id>
-  <username>string</username>
-  <firstName>string</firstName>
-  <lastName>string</lastName>
-  <email>string</email>
-  <password>string</password>
-  <phone>string</phone>
-  <userStatus>0</userStatus>
-</User>
-```
-
 ```json
 {
   "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
+  "slug": "string",
+  "displayName": "My Cool Customer",
+  "type": "saml",
+  "mapping": "saml_ldap_profile",
+  "passportStrategyId": "passport-saml",
+  "enabled": true,
+  "callbackUrl": "string",
+  "requestForEmail": true,
+  "emailLinkingSafe": true,
+  "authzParams": "string",
+  "logoPath": "string",
+  "options": {
+    "skipRequestCompression": "true,",
+    "authnRequestBinding": "HTTP-POST,",
+    "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient,",
+    "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=,",
+    "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO,",
+    "issuer": "urn:test:default"
+  },
+  "idpInitiated": {
+    "enabled": true,
+    "response_type": "code",
+    "scope": "openid profile"
+  }
 }
 ```
 
-<h3 id="getuserbyname-responses">Responses</h3>
+<h3 id="getmapping-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|successful operation|[User](#schemauser)|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid username supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|User not found|None|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|A provider object|[Provider](#schemaprovider)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
+|5XX|Unknown|Unexpected error.|None|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## updateUser
+## replaceMapping
 
-<a id="opIdupdateUser"></a>
+<a id="opIdreplaceMapping"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X PUT http://petstore.swagger.io/v2/user/{username} \
-  -H 'Content-Type: application/json'
+curl -X PUT https://t1.techno24x7.com/mappings/{mappingId} \
+  -H 'Content-Type: application/json' \
+  -H 'If-Match: string'
 
 ```
 
 ```http
-PUT http://petstore.swagger.io/v2/user/{username} HTTP/1.1
-Host: petstore.swagger.io
+PUT https://t1.techno24x7.com/mappings/{mappingId} HTTP/1.1
+Host: t1.techno24x7.com
 Content-Type: application/json
+
+If-Match: string
 
 ```
 
 ```javascript
 const inputBody = '{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
+  "name": "saml_ldap_profile",
+  "passportStrategyId": "passport_saml",
+  "mapping": {
+    "uid": "urn:oid:0.9.2342.19200300.100.1.1",
+    "mail": [
+      "email",
+      "urn:oid:0.9.2342.19200300.100.1.3",
+      "urn:oid:1.2.840.113549.1.9.1"
+    ],
+    "cn": "urn:oid:2.16.840.1.113730.3.1.241",
+    "displayName": "urn:oid:2.16.840.1.113730.3.1.241",
+    "givenName": "urn:oid:2.5.4.42",
+    "sn": "urn:oid:2.5.4.4"
+  }
 }';
 const headers = {
-  'Content-Type':'application/json'
+  'Content-Type':'application/json',
+  'If-Match':'string'
 };
 
-fetch('http://petstore.swagger.io/v2/user/{username}',
+fetch('https://t1.techno24x7.com/mappings/{mappingId}',
 {
   method: 'PUT',
   body: inputBody,
@@ -3648,10 +1934,11 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Content-Type' => 'application/json'
+  'Content-Type' => 'application/json',
+  'If-Match' => 'string'
 }
 
-result = RestClient.put 'http://petstore.swagger.io/v2/user/{username}',
+result = RestClient.put 'https://t1.techno24x7.com/mappings/{mappingId}',
   params: {
   }, headers: headers
 
@@ -3662,10 +1949,11 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
+  'If-Match': 'string'
 }
 
-r = requests.put('http://petstore.swagger.io/v2/user/{username}', headers = headers)
+r = requests.put('https://t1.techno24x7.com/mappings/{mappingId}', headers = headers)
 
 print(r.json())
 
@@ -3678,6 +1966,7 @@ require 'vendor/autoload.php';
 
 $headers = array(
     'Content-Type' => 'application/json',
+    'If-Match' => 'string',
 );
 
 $client = new \GuzzleHttp\Client();
@@ -3686,7 +1975,7 @@ $client = new \GuzzleHttp\Client();
 $request_body = array();
 
 try {
-    $response = $client->request('PUT','http://petstore.swagger.io/v2/user/{username}', array(
+    $response = $client->request('PUT','https://t1.techno24x7.com/mappings/{mappingId}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -3703,7 +1992,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/{username}");
+URL obj = new URL("https://t1.techno24x7.com/mappings/{mappingId}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("PUT");
 int responseCode = con.getResponseCode();
@@ -3731,10 +2020,11 @@ func main() {
 
     headers := map[string][]string{
         "Content-Type": []string{"application/json"},
+        "If-Match": []string{"string"},
     }
 
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("PUT", "http://petstore.swagger.io/v2/user/{username}", data)
+    req, err := http.NewRequest("PUT", "https://t1.techno24x7.com/mappings/{mappingId}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3744,69 +2034,97 @@ func main() {
 
 ```
 
-`PUT /user/{username}`
+`PUT /mappings/{mappingId}`
 
-*Updated user*
+*update mapping*
 
-This can only be done by the logged in user.
+Updates corresponding Mapping object replacing all it's data.
 
 > Body parameter
 
 ```json
 {
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
+  "name": "saml_ldap_profile",
+  "passportStrategyId": "passport_saml",
+  "mapping": {
+    "uid": "urn:oid:0.9.2342.19200300.100.1.1",
+    "mail": [
+      "email",
+      "urn:oid:0.9.2342.19200300.100.1.3",
+      "urn:oid:1.2.840.113549.1.9.1"
+    ],
+    "cn": "urn:oid:2.16.840.1.113730.3.1.241",
+    "displayName": "urn:oid:2.16.840.1.113730.3.1.241",
+    "givenName": "urn:oid:2.5.4.42",
+    "sn": "urn:oid:2.5.4.4"
+  }
 }
 ```
 
-<h3 id="updateuser-parameters">Parameters</h3>
+<h3 id="replacemapping-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|username|path|string|true|name that need to be updated|
-|body|body|[User](#schemauser)|true|Updated user object|
+|If-Match|header|string|false|Etag from the Mapping being updated|
+|mappingId|path|any|true|none|
+|body|body|[Mapping](#schemamapping)|false|none|
+|» id|body|integer(int64)|true|none|
+|» name|body|string|true|Mapping name|
+|» passportStrategyId|body|string|true|Related passport strategy id|
+|» mapping|body|object|true|Mapping with key (Gluu/LDAP) / value (mapping profile). Check example.|
 
-<h3 id="updateuser-responses">Responses</h3>
+<h3 id="replacemapping-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid user supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|User not found|None|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Corresponding Mapping updated with success|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
+|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict - Possibly simultaneous update caused by different Etag values|None|
+|5XX|Unknown|Unexpected error|None|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|204|Etag|string||actual Etag from the updated Mapping object|
 
 <aside class="success">
 This operation does not require authentication
 </aside>
 
-## deleteUser
+## deleteMapping
 
-<a id="opIddeleteUser"></a>
+<a id="opIddeleteMapping"></a>
 
 > Code samples
 
 ```shell
 # You can also use wget
-curl -X DELETE http://petstore.swagger.io/v2/user/{username}
+curl -X DELETE https://t1.techno24x7.com/mappings/{mappingId} \
+  -H 'If-Match: string'
 
 ```
 
 ```http
-DELETE http://petstore.swagger.io/v2/user/{username} HTTP/1.1
-Host: petstore.swagger.io
+DELETE https://t1.techno24x7.com/mappings/{mappingId} HTTP/1.1
+Host: t1.techno24x7.com
+
+If-Match: string
 
 ```
 
 ```javascript
 
-fetch('http://petstore.swagger.io/v2/user/{username}',
-{
-  method: 'DELETE'
+const headers = {
+  'If-Match':'string'
+};
 
+fetch('https://t1.techno24x7.com/mappings/{mappingId}',
+{
+  method: 'DELETE',
+
+  headers: headers
 })
 .then(function(res) {
     return res.json();
@@ -3820,9 +2138,13 @@ fetch('http://petstore.swagger.io/v2/user/{username}',
 require 'rest-client'
 require 'json'
 
-result = RestClient.delete 'http://petstore.swagger.io/v2/user/{username}',
+headers = {
+  'If-Match' => 'string'
+}
+
+result = RestClient.delete 'https://t1.techno24x7.com/mappings/{mappingId}',
   params: {
-  }
+  }, headers: headers
 
 p JSON.parse(result)
 
@@ -3830,8 +2152,11 @@ p JSON.parse(result)
 
 ```python
 import requests
+headers = {
+  'If-Match': 'string'
+}
 
-r = requests.delete('http://petstore.swagger.io/v2/user/{username}')
+r = requests.delete('https://t1.techno24x7.com/mappings/{mappingId}', headers = headers)
 
 print(r.json())
 
@@ -3842,13 +2167,17 @@ print(r.json())
 
 require 'vendor/autoload.php';
 
+$headers = array(
+    'If-Match' => 'string',
+);
+
 $client = new \GuzzleHttp\Client();
 
 // Define array of request body.
 $request_body = array();
 
 try {
-    $response = $client->request('DELETE','http://petstore.swagger.io/v2/user/{username}', array(
+    $response = $client->request('DELETE','https://t1.techno24x7.com/mappings/{mappingId}', array(
         'headers' => $headers,
         'json' => $request_body,
        )
@@ -3865,7 +2194,7 @@ try {
 ```
 
 ```java
-URL obj = new URL("http://petstore.swagger.io/v2/user/{username}");
+URL obj = new URL("https://t1.techno24x7.com/mappings/{mappingId}");
 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 con.setRequestMethod("DELETE");
 int responseCode = con.getResponseCode();
@@ -3891,8 +2220,12 @@ import (
 
 func main() {
 
+    headers := map[string][]string{
+        "If-Match": []string{"string"},
+    }
+
     data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("DELETE", "http://petstore.swagger.io/v2/user/{username}", data)
+    req, err := http.NewRequest("DELETE", "https://t1.techno24x7.com/mappings/{mappingId}", data)
     req.Header = headers
 
     client := &http.Client{}
@@ -3902,24 +2235,456 @@ func main() {
 
 ```
 
-`DELETE /user/{username}`
+`DELETE /mappings/{mappingId}`
 
-*Delete user*
+*delete Mapping*
 
-This can only be done by the logged in user.
+Deletes corresponding mapping object
 
-<h3 id="deleteuser-parameters">Parameters</h3>
+<h3 id="deletemapping-parameters">Parameters</h3>
 
 |Name|In|Type|Required|Description|
 |---|---|---|---|---|
-|username|path|string|true|The name that needs to be deleted|
+|If-Match|header|string|false|Etag from the Mapping being updated|
+|mappingId|path|string|true|none|
 
-<h3 id="deleteuser-responses">Responses</h3>
+<h3 id="deletemapping-responses">Responses</h3>
 
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
-|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Invalid username supplied|None|
-|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|User not found|None|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Corresponding Mapping deleted with success|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
+|5XX|Unknown|Unexpected error|None|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|204|Etag|string||actual Etag from the deleted Mapping object|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+<h1 id="nu-passport-config">config</h1>
+
+Manage gluu-passport configuration
+
+## getConfig
+
+<a id="opIdgetConfig"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET https://t1.techno24x7.com/config \
+  -H 'Accept: application/json'
+
+```
+
+```http
+GET https://t1.techno24x7.com/config HTTP/1.1
+Host: t1.techno24x7.com
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json'
+};
+
+fetch('https://t1.techno24x7.com/config',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json'
+}
+
+result = RestClient.get 'https://t1.techno24x7.com/config',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('https://t1.techno24x7.com/config', headers = headers)
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','https://t1.techno24x7.com/config', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("https://t1.techno24x7.com/config");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "https://t1.techno24x7.com/config", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /config`
+
+*return inbound configuration*
+
+This will return all providers added in passport.
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "serverUri": "https://t1.techno24x7.com",
+    "serverWebPort": 8090,
+    "spTLSCrtPath": "/etc/certs/passport-sp.crt",
+    "spTLSKeyPath": "/etc/certs/passport-sp.key",
+    "logLevel": "info"
+  }
+]
+```
+
+<h3 id="getconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|An array of providers|Inline|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
+
+<h3 id="getconfig-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[[Config](#schemaconfig)]|false|none|none|
+|» serverUri|string|true|none|Your host|
+|» serverWebPort|integer(int32)|true|none|Port to serve inbound identity|
+|» spTLSCrtPath|string|false|none|Path to passport Service Provider certificate file|
+|» spTLSKeyPath|string|true|none|Path to passport Service Provider key file|
+|» logLevel|string|true|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|logLevel|error|
+|logLevel|warn|
+|logLevel|info|
+|logLevel|debug|
+|logLevel|trace|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|200|x-next|string||A link to the next page of responses|
+
+<aside class="success">
+This operation does not require authentication
+</aside>
+
+## replaceConfig
+
+<a id="opIdreplaceConfig"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X PUT https://t1.techno24x7.com/config \
+  -H 'Content-Type: application/json' \
+  -H 'If-Match: string'
+
+```
+
+```http
+PUT https://t1.techno24x7.com/config HTTP/1.1
+Host: t1.techno24x7.com
+Content-Type: application/json
+
+If-Match: string
+
+```
+
+```javascript
+const inputBody = '{
+  "serverUri": "https://t1.techno24x7.com",
+  "serverWebPort": 8090,
+  "spTLSCrtPath": "/etc/certs/passport-sp.crt",
+  "spTLSKeyPath": "/etc/certs/passport-sp.key",
+  "logLevel": "info"
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'If-Match':'string'
+};
+
+fetch('https://t1.techno24x7.com/config',
+{
+  method: 'PUT',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'If-Match' => 'string'
+}
+
+result = RestClient.put 'https://t1.techno24x7.com/config',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'If-Match': 'string'
+}
+
+r = requests.put('https://t1.techno24x7.com/config', headers = headers)
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'application/json',
+    'If-Match' => 'string',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('PUT','https://t1.techno24x7.com/config', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("https://t1.techno24x7.com/config");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("PUT");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "If-Match": []string{"string"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("PUT", "https://t1.techno24x7.com/config", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`PUT /config`
+
+*update Config*
+
+Updates corresponding Config (unique) object replacing all it's data.
+
+> Body parameter
+
+```json
+{
+  "serverUri": "https://t1.techno24x7.com",
+  "serverWebPort": 8090,
+  "spTLSCrtPath": "/etc/certs/passport-sp.crt",
+  "spTLSKeyPath": "/etc/certs/passport-sp.key",
+  "logLevel": "info"
+}
+```
+
+<h3 id="replaceconfig-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|If-Match|header|string|false|Etag from the Config being updated|
+|body|body|[Config](#schemaconfig)|false|none|
+|» serverUri|body|string|true|Your host|
+|» serverWebPort|body|integer(int32)|true|Port to serve inbound identity|
+|» spTLSCrtPath|body|string|false|Path to passport Service Provider certificate file|
+|» spTLSKeyPath|body|string|true|Path to passport Service Provider key file|
+|» logLevel|body|string|true|none|
+
+#### Enumerated Values
+
+|Parameter|Value|
+|---|---|
+|» logLevel|error|
+|» logLevel|warn|
+|» logLevel|info|
+|» logLevel|debug|
+|» logLevel|trace|
+
+<h3 id="replaceconfig-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|204|[No Content](https://tools.ietf.org/html/rfc7231#section-6.3.5)|Config updated with success|None|
+|401|[Unauthorized](https://tools.ietf.org/html/rfc7235#section-3.1)|Bad Request|None|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Ressource not found|None|
+|409|[Conflict](https://tools.ietf.org/html/rfc7231#section-6.5.8)|Conflict - Possibly simultaneous update caused by different Etag values|None|
+|5XX|Unknown|Unexpected error|None|
+
+### Response Headers
+
+|Status|Header|Type|Format|Description|
+|---|---|---|---|---|
+|204|Etag|string||actual Etag from the updated Mapping object|
 
 <aside class="success">
 This operation does not require authentication
@@ -3927,21 +2692,30 @@ This operation does not require authentication
 
 # Schemas
 
-<h2 id="tocS_Order">Order</h2>
+<h2 id="tocS_Mapping">Mapping</h2>
 <!-- backwards compatibility -->
-<a id="schemaorder"></a>
-<a id="schema_Order"></a>
-<a id="tocSorder"></a>
-<a id="tocsorder"></a>
+<a id="schemamapping"></a>
+<a id="schema_Mapping"></a>
+<a id="tocSmapping"></a>
+<a id="tocsmapping"></a>
 
 ```json
 {
-  "id": 0,
-  "petId": 0,
-  "quantity": 0,
-  "shipDate": "2020-03-30T14:38:05Z",
-  "status": "placed",
-  "complete": false
+  "id": 14,
+  "name": "saml_ldap_profile",
+  "passportStrategyId": "passport_saml",
+  "mapping": {
+    "uid": "urn:oid:0.9.2342.19200300.100.1.1",
+    "mail": [
+      "email",
+      "urn:oid:0.9.2342.19200300.100.1.3",
+      "urn:oid:1.2.840.113549.1.9.1"
+    ],
+    "cn": "urn:oid:2.16.840.1.113730.3.1.241",
+    "displayName": "urn:oid:2.16.840.1.113730.3.1.241",
+    "givenName": "urn:oid:2.5.4.42",
+    "sn": "urn:oid:2.5.4.4"
+  }
 }
 
 ```
@@ -3950,124 +2724,45 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|integer(int64)|false|none|none|
-|petId|integer(int64)|false|none|none|
-|quantity|integer(int32)|false|none|none|
-|shipDate|string(date-time)|false|none|none|
-|status|string|false|none|Order Status|
-|complete|boolean|false|none|none|
+|id|integer(int64)|true|read-only|none|
+|name|string|true|none|Mapping name|
+|passportStrategyId|string|true|none|Related passport strategy id|
+|mapping|object|true|none|Mapping with key (Gluu/LDAP) / value (mapping profile). Check example.|
 
-#### Enumerated Values
-
-|Property|Value|
-|---|---|
-|status|placed|
-|status|approved|
-|status|delivered|
-
-<h2 id="tocS_Category">Category</h2>
+<h2 id="tocS_Provider">Provider</h2>
 <!-- backwards compatibility -->
-<a id="schemacategory"></a>
-<a id="schema_Category"></a>
-<a id="tocScategory"></a>
-<a id="tocscategory"></a>
+<a id="schemaprovider"></a>
+<a id="schema_Provider"></a>
+<a id="tocSprovider"></a>
+<a id="tocsprovider"></a>
 
 ```json
 {
   "id": 0,
-  "name": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|integer(int64)|false|none|none|
-|name|string|false|none|none|
-
-<h2 id="tocS_User">User</h2>
-<!-- backwards compatibility -->
-<a id="schemauser"></a>
-<a id="schema_User"></a>
-<a id="tocSuser"></a>
-<a id="tocsuser"></a>
-
-```json
-{
-  "id": 0,
-  "username": "string",
-  "firstName": "string",
-  "lastName": "string",
-  "email": "string",
-  "password": "string",
-  "phone": "string",
-  "userStatus": 0
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|integer(int64)|false|none|none|
-|username|string|false|none|none|
-|firstName|string|false|none|none|
-|lastName|string|false|none|none|
-|email|string|false|none|none|
-|password|string|false|none|none|
-|phone|string|false|none|none|
-|userStatus|integer(int32)|false|none|User Status|
-
-<h2 id="tocS_Tag">Tag</h2>
-<!-- backwards compatibility -->
-<a id="schematag"></a>
-<a id="schema_Tag"></a>
-<a id="tocStag"></a>
-<a id="tocstag"></a>
-
-```json
-{
-  "id": 0,
-  "name": "string"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|id|integer(int64)|false|none|none|
-|name|string|false|none|none|
-
-<h2 id="tocS_Pet">Pet</h2>
-<!-- backwards compatibility -->
-<a id="schemapet"></a>
-<a id="schema_Pet"></a>
-<a id="tocSpet"></a>
-<a id="tocspet"></a>
-
-```json
-{
-  "id": 0,
-  "category": {
-    "id": 0,
-    "name": "string"
+  "slug": "string",
+  "displayName": "My Cool Customer",
+  "type": "saml",
+  "mapping": "saml_ldap_profile",
+  "passportStrategyId": "passport-saml",
+  "enabled": true,
+  "callbackUrl": "string",
+  "requestForEmail": true,
+  "emailLinkingSafe": true,
+  "authzParams": "string",
+  "logoPath": "string",
+  "options": {
+    "skipRequestCompression": "true,",
+    "authnRequestBinding": "HTTP-POST,",
+    "identifierFormat": "urn:oasis:names:tc:SAML:2.0:nameid-format:transient,",
+    "cert": "MIIDhTCCAm0CFACNYWIybrueNC5hU1WfOQpJO6VyMA0GCSqGSIb3DQEBCwUAMH8xCzAJBgNVBAYTAkJSMQswCQYDVQQIDAJTUDESMBAGA1UEBwwJU2FvIFBhdWxvMRQwEgYDVQQKDAtDaHJpcyBUZXN0czEaMBgGA1UEAwwRdDMudGVjaG5vMjR4Ny5jb20xHTAbBgkqhkiG9w0BCQEWDmNocmlzQGdsdXUub3JnMB4XDTIwMDcyODIxMjE1NVoXDTIxMDcyODIxMjE1NVowfzELMAkGA1UEBhMCQlIxCzAJBgNVBAgMAlNQMRIwEAYDVQQHDAlTYW8gUGF1bG8xFDASBgNVBAoMC0NocmlzIFRlc3RzMRowGAYDVQQDDBF0My50ZWNobm8yNHg3LmNvbTEdMBsGCSqGSIb3DQEJARYOY2hyaXNAZ2x1dS5vcmcwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC2+RUYIDD+NipJ8n502bZmL1y8007amyOKn8g46EGiJ257apIClqVb2gnE4wxzUXS+c5p35eqFvaGiu0hiW88AdPG0eCpfsdSa0T/GQV1EYWygcBGZanGSNB6a9DMA3TDBTfDbxBm3zDPwu04bw59ZszM3xcFiL6Dq4qdMFym6lF5PWa+B6LBzGeIy/U4YD7PrgKB98i+sjUii4OeMoo1YSMVthc4e9XsPeBM+51aVZabaxLQImb9pc1jNxATjKQJ9V6R4HleyKo11yx2I67vAZQ2lRvUQiQxoTM6kjYcE7eIRCCK7XqX/GP21DAbteuTVKPVLf+Knfcm2PG/egYApAgMBAAEwDQYJKoZIhvcNAQELBQADggEBAKOnpjKGyUe3COY8ZJjt5WRb1XbM+0wBrIZJmxCD2md70HhsksK1493x/3G0mxJcioxmGu4uswNfpaTO6RKcQ2X10TcVgmLqlMnG+dRFac4QC0VWtEZFAYTzYgPZC7wflbFT59RVTBPVhDOITEcD5FdeN2w+jDmGWRxWsmuZwiZ6Nzd6a5CwlkwwEK+z61p5WhmU22VyfeNAxWCAc+RYXkbSsogiQkBb27eRWCsUo44ffZnzbIECSUbdtu9YzJTHo5V4b20/e3TR0XCtTu8ixnT74S6DcsSfDGSOxe2QPsEAGxalHRg4zzyYbXPMEtWoc3XpzLW+OIlJgKPdpy/xqUk=,",
+    "entryPoint": "https://t3.techno24x7.com/idp/profile/SAML2/POST/SSO,",
+    "issuer": "urn:test:default"
   },
-  "name": "doggie",
-  "photoUrls": [
-    "string"
-  ],
-  "tags": [
-    {
-      "id": 0,
-      "name": "string"
-    }
-  ],
-  "status": "available"
+  "idpInitiated": {
+    "enabled": true,
+    "response_type": "code",
+    "scope": "openid profile"
+  }
 }
 
 ```
@@ -4076,32 +2771,108 @@ This operation does not require authentication
 
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
-|id|integer(int64)|false|none|none|
-|category|[Category](#schemacategory)|false|none|none|
-|name|string|true|none|none|
-|photoUrls|[string]|true|none|none|
-|tags|[[Tag](#schematag)]|false|none|none|
-|status|string|false|none|pet status in the store|
+|id|integer(int64)|true|read-only|none|
+|slug|string|false|read-only|Will be created based on displayName<br>Example:<br>| Name             | slug             | metadata-url                     | |------------------|------------------|----------------------------------| | My Cool Customer | my-cool-customer | /providers/my-cool-customer/meta ||
+|displayName|string|true|none|Name displayed to users|
+|type|string|true|none|- `saml`: for inbound saml flows with desired **IDP**<br>- `openidconnect`: for inbound oidc-flows with desired **OP**<br>- `openidconnect-oxd`: for inbound oidc flows using **oxd**<br>- `oauth`: for inbound oAuth flow with desired AS|
+|mapping|string|true|none|More infos about attributes mapping (here)[https://gluu.org/docs/gluu-server/4.2/authn-guide/passport/#attribute-mapping-and-transformation] LINK TO MAPPING ID|
+|passportStrategyId|string|true|none|StrategyId text unique identifier|
+|enabled|boolean|true|none|Defines if provider is enabled (true) or not (false)|
+|callbackUrl|string|true|read-only|Passport provider callback Url. It's auto-generated.|
+|requestForEmail|boolean|true|none|Enable request for e-mail feature, for more information please check gluu-passport docs.|
+|emailLinkingSafe|boolean|true|none|Enable email linking feature, for more information please check gluu-passport docs.|
+|authzParams|string|false|none|Usually may be left blank. It is used to supply the value for the second parameter of Passport.js method passport.authenticate|
+|logoPath|string|false|none|path for the provider's logo file.|
+|options|object|true|none|Providers' strategy options. Please check each strategy documentation for options.|
+|idpInitiated|object|false|none|idp-initiated flow settings for provider|
+|» enabled|boolean|true|none|Enable/Disable idp-initiated flow for this provider|
+|» response_type|string|false|none|Response type requested to OIDC OP|
+|» scope|string|false|none|scopes requested to OIDC OP separated by spaces|
 
 #### Enumerated Values
 
 |Property|Value|
 |---|---|
-|status|available|
-|status|pending|
-|status|sold|
+|type|saml|
+|type|openidconnect|
+|type|openidconnect-oxd|
+|type|oauth|
 
-<h2 id="tocS_ApiResponse">ApiResponse</h2>
+<h2 id="tocS_Config">Config</h2>
 <!-- backwards compatibility -->
-<a id="schemaapiresponse"></a>
-<a id="schema_ApiResponse"></a>
-<a id="tocSapiresponse"></a>
-<a id="tocsapiresponse"></a>
+<a id="schemaconfig"></a>
+<a id="schema_Config"></a>
+<a id="tocSconfig"></a>
+<a id="tocsconfig"></a>
+
+```json
+{
+  "serverUri": "https://t1.techno24x7.com",
+  "serverWebPort": 8090,
+  "spTLSCrtPath": "/etc/certs/passport-sp.crt",
+  "spTLSKeyPath": "/etc/certs/passport-sp.key",
+  "logLevel": "info"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|serverUri|string|true|none|Your host|
+|serverWebPort|integer(int32)|true|none|Port to serve inbound identity|
+|spTLSCrtPath|string|false|none|Path to passport Service Provider certificate file|
+|spTLSKeyPath|string|true|none|Path to passport Service Provider key file|
+|logLevel|string|true|none|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|logLevel|error|
+|logLevel|warn|
+|logLevel|info|
+|logLevel|debug|
+|logLevel|trace|
+
+<h2 id="tocS_IdpInitiated">IdpInitiated</h2>
+<!-- backwards compatibility -->
+<a id="schemaidpinitiated"></a>
+<a id="schema_IdpInitiated"></a>
+<a id="tocSidpinitiated"></a>
+<a id="tocsidpinitiated"></a>
+
+```json
+{
+  "oidcClient": {
+    "authorizationEndpoint": "https://t1.techno24x7.com/oxauth/restv1/authorize",
+    "clientId": "1503.b9862289-9d1c-4bd3-9197-3bb69c86ffda",
+    "acrValues": "passport_saml"
+  }
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|oidcClient|object|true|none|OIDC client (oxAuth) used for IDP-INITIATED flows|
+|» authorizationEndpoint|string|true|none|OIDC OP authorization endpoint|
+|» clientId|string|true|none|client ID registered on OIDC OP|
+|» acrValues|string|true|none|ACR Values to send as param to OIDC OP auth endpoint|
+
+<h2 id="tocS_Error">Error</h2>
+<!-- backwards compatibility -->
+<a id="schemaerror"></a>
+<a id="schema_Error"></a>
+<a id="tocSerror"></a>
+<a id="tocserror"></a>
 
 ```json
 {
   "code": 0,
-  "type": "string",
   "message": "string"
 }
 
@@ -4112,18 +2883,5 @@ This operation does not require authentication
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |code|integer(int32)|false|none|none|
-|type|string|false|none|none|
 |message|string|false|none|none|
-
-<script type="application/ld+json">
-{
-  "@context": "http://schema.org/",
-  "@type": "WebAPI",
-  "description": ":dog: :cat: :rabbit: This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
-  "documentation": "https://mermade.github.io/shins/asyncapi.html",
-  "termsOfService": "http://swagger.io/terms/",
-  
-  "name": "Swagger Petstore"
-}
-</script>
 
